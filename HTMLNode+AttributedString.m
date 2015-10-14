@@ -10,11 +10,11 @@
 
 @implementation HTMLNode (AttributedString)
 
-- (NSAttributedString *) attributedString:(NSDictionary *(^)(HTMLNodeType))attributesForNodeType {
+- (NSMutableAttributedString *) attributedString:(NSDictionary *(^)(HTMLNodeType))attributesForNodeType {
     return [HTMLNode traverseNode:self attributesForNodeType:attributesForNodeType];
 }
 
-+ (NSAttributedString *) traverseNode:(HTMLNode *)node attributesForNodeType:(NSDictionary *(^)(HTMLNodeType))attributesForNodeType {
++ (NSMutableAttributedString *) traverseNode:(HTMLNode *)node attributesForNodeType:(NSDictionary *(^)(HTMLNodeType))attributesForNodeType {
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] init];
     for(int i = 0; i < node.children.count; i++) {
         [string appendAttributedString:[self traverseNode:node.children[i] attributesForNodeType:attributesForNodeType]];
