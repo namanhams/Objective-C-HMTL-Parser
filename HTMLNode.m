@@ -193,7 +193,7 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr)
 	xmlNode *cur_node = NULL;
 	NSMutableArray * array = [NSMutableArray array]; 
 
-	for (cur_node = _node->children; cur_node; cur_node = cur_node->next) 
+	for (cur_node = _node->children; cur_node != NULL; cur_node = cur_node->next)
 	{	
 		HTMLNode * node = [[HTMLNode alloc] initWithXMLNode:cur_node];
 		[array addObject:node];

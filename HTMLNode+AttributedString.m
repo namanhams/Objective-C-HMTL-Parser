@@ -20,7 +20,7 @@
         [string appendAttributedString:[self traverseNode:node.children[i] attributesForNodeType:attributesForNodeType]];
     }
         
-    if(node.nodetype == HTMLTextNode)
+    if(node.nodetype == HTMLTextNode && node.rawContents != nil)
         [string appendAttributedString:[[NSAttributedString alloc] initWithString:node.rawContents]];
     
     // Apply attributes
