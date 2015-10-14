@@ -328,7 +328,9 @@ HTMLNodeType nodeType(xmlNode * _node)
 		return HTMLUnkownNode;
 	
 	const char * tagName = (const char*)_node->name;
-	if (strcmp(tagName, "a") == 0)
+    if (strcmp(tagName, "b") == 0)
+        return HTMLBoldNode;
+	else if (strcmp(tagName, "a") == 0)
 		return HTMLHrefNode;
 	else if (strcmp(tagName, "text") == 0)
 		return HTMLTextNode;
