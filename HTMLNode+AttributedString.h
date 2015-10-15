@@ -11,6 +11,6 @@
 
 @interface HTMLNode (AttributedString)
 
-- (NSMutableAttributedString *) attributedString:(NSDictionary * (^)(HTMLNodeType))attributesForNodeType;
+- (NSMutableAttributedString *) attributedString:(NSDictionary *(^)(HTMLNode *))attributesForNode;
 
 @end

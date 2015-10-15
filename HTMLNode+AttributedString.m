@@ -10,22 +10,22 @@
 
 @implementation HTMLNode (AttributedString)
 
-- (NSMutableAttributedString *) attributedString:(NSDictionary *(^)(HTMLNodeType))attributesForNodeType {
-    return [HTMLNode traverseNode:self attributesForNodeType:attributesForNodeType];
+- (NSMutableAttributedString *) attributedString:(NSDictionary *(^)(HTMLNode *))attributesForNode {
+    return [HTMLNode traverseNode:self attributesForNode:attributesForNode];
 }
 
-+ (NSMutableAttributedString *) traverseNode:(HTMLNode *)node attributesForNodeType:(NSDictionary *(^)(HTMLNodeType))attributesForNodeType {
++ (NSMutableAttributedString *) traverseNode:(HTMLNode *)node attributesForNode:(NSDictionary *(^)(HTMLNode *))attributesForNode {
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] init];
     for(int i = 0; i < node.children.count; i++) {
-        [string appendAttributedString:[self traverseNode:node.children[i] attributesForNodeType:attributesForNodeType]];
+        [string appendAttributedString:[self traverseNode:node.children[i] attributesForNode:attributesForNode]];
     }
         
     if(node.nodetype == HTMLTextNode && node.rawContents != nil)
         [string appendAttributedString:[[NSAttributedString alloc] initWithString:node.rawContents]];
     
     // Apply attributes
-    if(attributesForNodeType != nil) {
-        NSDictionary *attributes = attributesForNodeType(node.nodetype);
+    if(attributesForNode != nil) {
+        NSDictionary *attributes = attributesForNode(node);
         if(attributes != nil)
             [string setAttributes:attributes range:NSMakeRange(0, string.length)];
     }
